@@ -1,6 +1,7 @@
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.Random;
 
 public class game {
 
@@ -114,12 +115,22 @@ public class game {
         System.out.println(
                 "Pick where to make a move, enter the number of the spot you want to move to (0 to quit game): ");
     }
+    // Randomly returns a starting player
+    public static String pickPlayer() {
+        Random playerSel = new Random();
+        System.out.println(playerSel.nextInt(2));
+        if (playerSel.nextInt(3) == 1) {
+            return "X";
+        } else {
+            return "O";
+        }
+    }
 
     public static void main(String[] args) {
         Dictionary<Integer, String> gameGrid = new Hashtable<>();
         String player1Name;
         String player2Name;
-        String currentPlayer = "O";
+        String currentPlayer = pickPlayer();
         String winner = "none";
 
         // Setup the gamegrid for the new game
@@ -168,7 +179,7 @@ public class game {
                 System.out.println("The game is tied");
                 winner = "Tie";
             } else {
-                printPlayGrid(numGrid, gameGrid, currentPlayer);
+                printPlayGrid(numGrid, gameGrid, getPlayerName(currentPlayer, player1Name, player2Name));
                 int moveLoc = getMove.nextInt();
                 getMove.nextLine();
                 // Move the player
