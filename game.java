@@ -3,6 +3,17 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class game {
+
+    public static String  getPlayerName(String player, String player1name, String player2name) {
+        if (player == "X") {
+            return player1name;
+        } else if (player == "O") {
+            return player2name;
+        } else {
+            return "none";
+        }
+    }
+    
     public static void printGrid(Dictionary<Integer, String> gameGrid) {
         System.out.println(
                 " " + gameGrid.get(1) + " | " + gameGrid.get(2) + " | " + gameGrid.get(3)
@@ -106,10 +117,9 @@ public class game {
 
     public static void main(String[] args) {
         Dictionary<Integer, String> gameGrid = new Hashtable<>();
-
-        String currentPlayer = "O";
         String player1Name;
         String player2Name;
+        String currentPlayer = "O";
         String winner = "none";
 
         // Setup the gamegrid for the new game
@@ -136,14 +146,23 @@ public class game {
         numGrid.put(9, "9");
 
         Scanner getMove = new Scanner(System.in);
+        // Welcome the user to the game
+        System.out.println("Java Tic-Tac-Toe | Made by Finley224");
+        // Ask for the name of player 1
+        System.out.print("Enter player 1 (X) name: ");
+        player1Name = getMove.nextLine();
+        // Ask for the name of player 2
+        System.out.print("Enter player 2 (O) name: ");
+        player2Name = getMove.nextLine();
+        
 
         // Main loop
         while (winner == "none") {
             if (checkWin(gameGrid) == "X") {
-                System.out.println("Player X wins the game");
+                System.out.println(player1Name + " wins the game.");
                 winner = "X";
             } else if (checkWin(gameGrid) == "O") {
-                System.out.println("Player O wins the game");
+                System.out.println(player2Name + " wins the game");
                 winner = "O";
             } else if (checkWin(gameGrid) == "Tie") {
                 System.out.println("The game is tied");
